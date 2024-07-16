@@ -8,12 +8,14 @@
 // Game Class
 class Game {
   // Class Constructor
-  constructor(width = 6, height = 7, p1 = 1, p2 = 2) {
+  constructor(width = 6, height = 7, p1, p2) {
     this.width = width;
     this.height = height;
+    this.players = [p1, p2];
     this.currPlayer = p1;
     this.makeBoard();
     this.makeHtmlBoard();
+    this.gameOver = false;
   }
 
   /** makeBoard: create in-JS board structure:
@@ -76,7 +78,7 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
-    piece.classList.add(`p${this.currPlayer}`);
+    piece.style.backgroundColor = this.currPlayer.color;
     piece.style.top = -50 * (y + 2);
 
     const spot = document.getElementById(`${y}-${x}`);
@@ -86,6 +88,8 @@ class Game {
   /** endGame: announce game end */
   endGame(msg) {
     alert(msg);
+    const top = document.querySelector('#column-top');
+    top.removeEventListener('click', this.handleGameClick);
   }
 
   /** handleClick: handle click of column top to play piece */
@@ -105,7 +109,10 @@ class Game {
 
     // check for win
     if (this.checkForWin()) {
-      return this.endGame(`Player ${this.currPlayer} won!`);
+      this.gameOver = true;
+      let colorHex = this.currPlayer.color;
+      return this.endGame(`Player ${this.currPlayer.playerNum} won!`);
+
     }
 
     // check for tie
@@ -114,7 +121,7 @@ class Game {
     }
 
     // switch players
-    this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+    this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
   }
 
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -152,19 +159,21 @@ class Game {
 
 } //END OF GAME CLASS
 
+class Player {
+  constructor(playerNum, color) {
+    this.playerNum = playerNum;
+    this.color = color;
+  }
+}
 
 //Start the Game 
 document.querySelector('#submit').addEventListener('click', (e) => {
   e.preventDefault();
 
-
-  let player1Color = document.getElementById('p1clr').value;
-  let player2Color = document.getElementById('p2clr').value;
-  console.log(`p1: ${player1Color} and p2: ${player2Color}`);
-
-
+  let player1 = new Player('Player 1', document.getElementById('p1clr').value);
+  let player2 = new Player('Player 2', document.getElementById('p2clr').value);
 
   //Create an instance of the Game Class
-  new Game(6, 7);
+  new Game(6, 7, player1, player2);
 
 });
