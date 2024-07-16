@@ -152,6 +152,19 @@ class Game {
 
 } //END OF GAME CLASS
 
-//Create an instance of the Game Class
-new Game(6, 7);
 
+//Start the Game 
+document.querySelector('#submit').addEventListener('click', (e) => {
+  e.preventDefault();
+
+
+  let player1Color = document.getElementById('p1clr').value;
+  let player2Color = document.getElementById('p2clr').value;
+  console.log(`p1: ${player1Color} and p2: ${player2Color}`);
+
+
+
+  //Create an instance of the Game Class
+  new Game(6, 7);
+
+});

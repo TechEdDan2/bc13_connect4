@@ -1,15 +1,38 @@
 <!doctype html>
+
 <head>
   <title>Connect 4</title>
   <link href="connect4.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div id="game">
-  <table id="board"></table>
-</div>
+  <form action="" class="playerInput">
 
-<script src="connect4.js"></script>
+    <div class="playerBox">
+      <div class="playerInput">
+        <label for="player1">Pick Player 1 Color</label>
+        <input type="color" name="p1clr" id="p1clr" required />
+      </div>
+
+      <div class="playerInput">
+        <label for="player2">Pick Player 2 Color</label>
+        <input type="color" name="p2clr" id="p2clr" required />
+      </div>
+
+    </div>
+
+    <div class="submitBox" id="submit">
+      <input type="submit" value="Start Game" />
+    </div>
+  </form>
+
+  <div id="game">
+    <table id="board"></table>
+  </div>
+
+  <script src="connect4.js"></script>
 
 </body>
+
 </html>

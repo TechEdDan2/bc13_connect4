@@ -1,3 +1,25 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* Player Color Selections */
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  padding: 1.5rem;
+}
+
+#submit {
+  margin-left: 1rem;
+}
+
 /* game board table */
 
 #board td {
